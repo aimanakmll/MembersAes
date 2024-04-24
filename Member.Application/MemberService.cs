@@ -3,21 +3,27 @@
 namespace Member.Application
 {
     //Implement Bussiness Rule / USE CASES
-    public class MemberService : IMemberService
+    public class MemberService : MemberServiceBase
     {
-        private readonly IMemberRepository memberRepository;
-        public MemberService(IMemberRepository memberRepository)
+        private readonly MemberRepositoryBase memberRepository;
+        public MemberService(MemberRepositoryBase memberRepository)
         {
             this.memberRepository = memberRepository;
         }
-        List<Domain.Member> IMemberService.GetAllMembers()
+
+        public override List<Domain.Member> GetAllMembers()
         {
             return this.memberRepository.GetAllMembers();
         }
 
-        public Domain.Member AddMember(Domain.Member member)
+        public override Domain.Member AddMember(Domain.Member member)
         {
             return this.memberRepository.AddMember(member);
+        }
+
+        public override Domain.Member GetMemberByName(string name)
+        {
+            return this.memberRepository.GetMemberByName(name);
         }
     }
 }

@@ -21,8 +21,24 @@
   },
   {
     "ContainingType": "Member.API.Controllers.MembersController",
+    "Method": "EncryptPassword",
+    "RelativePath": "api/Members/encrypt",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "encryptionRequest",
+        "Type": "Member.API.Controllers.MembersController\u002BEncryptionRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Member.API.Controllers.MembersController",
     "Method": "Post",
-    "RelativePath": "api/Members",
+    "RelativePath": "api/Members/Insert Data",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -44,5 +60,21 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Member.API.Controllers.MembersController",
+    "Method": "Login",
+    "RelativePath": "api/Members/login using AES",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginModel",
+        "Type": "Member.API.Controllers.MembersController\u002BMemberLoginRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

@@ -7,18 +7,18 @@ using Member.Domain;
 
 namespace Member.Infrastructure
 {
-    public class MemberRepository : IMemberRepository
+    public class MemberRepository : MemberRepositoryBase
     {
         private readonly string _connectionString;
-        private readonly IEncryptService _encryptService;
+        private readonly EncryptServiceBase _encryptService;
 
-        public MemberRepository(string connectionString, IEncryptService encryptService)
+        public MemberRepository(string connectionString, EncryptServiceBase encryptService)
         {
             _connectionString = connectionString;
             _encryptService = encryptService;
         }
 
-        public List<Domain.Member> GetAllMembers()
+        public override List<Domain.Member> GetAllMembers()
         {
             List<Domain.Member> members = new List<Domain.Member>();
 
@@ -71,7 +71,7 @@ namespace Member.Infrastructure
             return members;
         }
 
-        public Domain.Member AddMember(Domain.Member member)
+        public override Domain.Member AddMember(Domain.Member member)
         {
             try
             {
@@ -101,6 +101,45 @@ namespace Member.Infrastructure
             catch (Exception ex)
             {
                 Console.WriteLine($"Error adding member: {ex.Message}");
+                throw;
+            }
+        }
+
+        // New method to get a member by name
+        public override Domain.Member GetMemberByName(string name)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT Id, Name, Password FROM Members WHERE Name = @Name";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Name", name);
+                        //command.Parameters.AddWithValue("@Password", password);
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        if (reader.Read())
+                        {
+                            return new Domain.Member
+                            {
+                                Id = reader.GetInt32(0),
+                                Name = reader.GetString(1),
+                                Password = _encryptService.DecryptPassword(reader.GetString(2))
+                            };
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving member by name: {ex.Message}");
                 throw;
             }
         }
