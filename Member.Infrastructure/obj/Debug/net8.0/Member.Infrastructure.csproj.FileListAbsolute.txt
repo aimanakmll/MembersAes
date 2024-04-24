@@ -49,3 +49,4 @@ C:\Users\Akmal\source\repos\WeatherWebApplication - Encrypt and Decrypt using AE
 C:\Users\Akmal\source\repos\WeatherWebApplication - Encrypt and Decrypt using AES\Member.Infrastructure\obj\Debug\net8.0\refint\Member.Infrastructure.dll
 C:\Users\Akmal\source\repos\WeatherWebApplication - Encrypt and Decrypt using AES\Member.Infrastructure\obj\Debug\net8.0\Member.Infrastructure.pdb
 C:\Users\Akmal\source\repos\WeatherWebApplication - Encrypt and Decrypt using AES\Member.Infrastructure\obj\Debug\net8.0\ref\Member.Infrastructure.dll
+C:\Users\Akmal\source\repos\WeatherWebApplication - Encrypt and Decrypt using AES\Member.Infrastructure\obj\Debug\net8.0\Member.Infrastructure.sourcelink.json

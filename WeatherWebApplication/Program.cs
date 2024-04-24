@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 using Member.Application;
 using Member.Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -15,7 +16,7 @@ builder.Services.AddSwaggerGen();
 // Hardcoded connection string
 string connectionString = "Data Source=.\\sqlexpress;Initial Catalog=SystemsAPI;Integrated Security=True";
 
-// Register services with dependency injection
+//// Register services with dependency injection
 builder.Services.AddScoped<IMemberRepository>(provider =>
 {
     // Generate or fetch the encryption key
@@ -42,3 +43,15 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
+
+
+// Generate a random encryption key
+//byte[] key = new byte[32]; // 256 bits key size
+//using (var rng = new RNGCryptoServiceProvider())
+//{
+//    rng.GetBytes(key);
+//}
+//string encryptionKey = Convert.ToBase64String(key);
