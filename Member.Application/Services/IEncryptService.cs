@@ -72,11 +72,34 @@ namespace Member.Application
                             int decryptedLength = cryptoStream.Read(decryptedBytes, 0, decryptedBytes.Length);
                             // Trim null characters from the decrypted string
                             string decryptedString = Encoding.UTF8.GetString(decryptedBytes, 0, decryptedLength);
-                            return decryptedString;
+                            return decryptedString.TrimEnd('\0');
                         }
                     }
                 }
             }
         }
+
+        //private string DecryptText(string encryptedText, string password)
+        //{
+        //    byte[] bytes = Convert.FromBase64String(encryptedText);
+        //    using (SymmetricAlgorithm crypt = Aes.Create())
+        //    {
+        //        using (HashAlgorithm hash = MD5.Create())
+        //        {
+        //            crypt.Key = hash.ComputeHash(Encoding.UTF8.GetBytes(password)); // Change encoding to UTF8
+        //            crypt.IV = _iv;
+
+        //            using (var memoryStream = new System.IO.MemoryStream(bytes))
+        //            {
+        //                using (var cryptoStream = new CryptoStream(memoryStream, crypt.CreateDecryptor(), CryptoStreamMode.Read))
+        //                {
+        //                    byte[] decryptedBytes = new byte[bytes.Length];
+        //                    cryptoStream.Read(decryptedBytes, 0, decryptedBytes.Length);
+        //                    return Encoding.UTF8.GetString(decryptedBytes); // Change encoding to UTF8
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
